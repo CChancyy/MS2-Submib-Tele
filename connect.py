@@ -120,25 +120,25 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     ## here insert if statement 
     if "Washer 1" in update.message.text:
       ref2 = db.collection("washers").document("washers1")
-      ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
+      ref2.update({"avail": True,"used_by":str(update.message.from_user.id)})
     if "Washer 2" in update.message.text:
       ref2 = db.collection("washers").document("washers2")
-      ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
+      ref2.update({"avail": True,"used_by":str(update.message.from_user.id)})
     if "Washer 3" in update.message.text:
       ref2 = db.collection("washers").document("washers3")
-      ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
+      ref2.update({"avail": True,"used_by":str(update.message.from_user.id)})
     if "Dryer 1" in update.message.text:
       ref2 = db.collection("dryers").document("dryer1")
-      ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
+      ref2.update({"avail": True,"used_by":str(update.message.from_user.id)})
     if "Dryer 2" in update.message.text:
       ref2 = db.collection("dryers").document("dryer2")
-      ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
+      ref2.update({"avail": True,"used_by":str(update.message.from_user.id)})
     if "Dryer 3" in update.message.text:
       ref2 = db.collection("dryers").document("dryer3")
-      ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
+      ref2.update({"avail": True,"used_by":str(update.message.from_user.id)})
     if "Dryer 4" in update.message.text:
       ref2 = db.collection("dryers").document("dryer4")
-      ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
+      ref2.update({"avail": True,"used_by":str(update.message.from_user.id)})
     await update.message.reply_text("Your laundry is done. Please collect soon! ")
 
 async def help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
