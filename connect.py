@@ -63,7 +63,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
   if "using" in update.message.text:
-    reply_keyboard = [["Washer 1", "Washer 2","Washer 3"],["Dryer 1", "Dryer 2"]]
+    reply_keyboard = [["Washer 1", "Washer 2","Washer 3"],["Dryer 1", "Dryer 2","Dryer 3","Dryer 4"]]
     await update.message.reply_text(
         "Please select a location",
         reply_markup=ReplyKeyboardMarkup(
@@ -85,21 +85,27 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     time1 = now + timedelta(seconds=30)
     time2 = now + timedelta(seconds=60)
     #await update.message.reply_text("Your laundry will be done in 30 minutes.")
+
   if "Washer 1" in update.message.text:
     ref2 = db.collection("washers").document("washers1")
-    ref2.update({"avail": False})
-    print ('updated')
+    ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
   if "Washer 2" in update.message.text:
     ref2 = db.collection("washers").document("washers2")
-    ref2.update({"avail": False})
+    ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
   if "Washer 3" in update.message.text:
     ref2 = db.collection("washers").document("washers3")
-    ref2.update({"avail": False})
+    ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
   if "Dryer 1" in update.message.text:
     ref2 = db.collection("dryers").document("dryer1")
-    ref2.update({"avail": False})
+    ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
   if "Dryer 2" in update.message.text:
     ref2 = db.collection("dryers").document("dryer2")
+    ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
+  if "Dryer 3" in update.message.text:
+    ref2 = db.collection("dryers").document("dryer3")
+    ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
+  if "Dryer 4" in update.message.text:
+    ref2 = db.collection("dryers").document("dryer4")
     ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
 
 
@@ -111,8 +117,28 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
   while datetime.now() < time2 :
     continue
   else:
-    ref2 = db.collection("Machines").document("machine_1")
-    ref2.update({"avail": True})
+    ## here insert if statement 
+    if "Washer 1" in update.message.text:
+      ref2 = db.collection("washers").document("washers1")
+      ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
+    if "Washer 2" in update.message.text:
+      ref2 = db.collection("washers").document("washers2")
+      ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
+    if "Washer 3" in update.message.text:
+      ref2 = db.collection("washers").document("washers3")
+      ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
+    if "Dryer 1" in update.message.text:
+      ref2 = db.collection("dryers").document("dryer1")
+      ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
+    if "Dryer 2" in update.message.text:
+      ref2 = db.collection("dryers").document("dryer2")
+      ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
+    if "Dryer 3" in update.message.text:
+      ref2 = db.collection("dryers").document("dryer3")
+      ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
+    if "Dryer 4" in update.message.text:
+      ref2 = db.collection("dryers").document("dryer4")
+      ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
     await update.message.reply_text("Your laundry is done. Please collect soon! ")
 
 async def help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
