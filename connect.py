@@ -6,7 +6,7 @@ import asyncio
 
 nest_asyncio.apply()
 
-cred = credentials.Certificate('/Users/zhangchenxi/Downloads/test1-0807-cloud.json')
+cred = credentials.Certificate('/Applications/NUS/Orbital Material/Database/_MS2 Submission/test1-0807-cloud.json')
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
