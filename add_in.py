@@ -85,7 +85,17 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         if "finish" in update.message.text:
             collect_time = datetime.now()
             if collect_time < time2 + timedelta(seconds=60): # collect with in 5 min 
-                ## need to write the command to change the thing here use where i think 
+                ## add the point in 
+                userid = update.message.from_user.id
+                ref3 = db.collection('users').where('id', '==', str(userid)).get()
+                for each in ref3:
+                    pr = '{} => {}'.format(each.id, each.to_dict()) # this is the dictionary 
+                    
+                    ref4 = db.collection("users").document("each")
+                    ref4.update
+                    ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
+
+
 
                 await update.message.reply_text("Thank you! We have awarded you 5 ponits.")
 
@@ -102,6 +112,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     if "Washer 1" in update.message.text:
         ref2 = db.collection("washers").document("washers1")
         ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})
+
     if "Washer 2" in update.message.text:
         ref2 = db.collection("washers").document("washers2")
         ref2.update({"avail": False,"used_by":str(update.message.from_user.id)})

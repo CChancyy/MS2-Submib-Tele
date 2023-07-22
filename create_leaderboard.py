@@ -20,9 +20,29 @@ for post in existing_posts:
     print(u'{} => {}'.format(post.id, post.to_dict()))
     print (post.get('username')) ## it has returned the correct one 
 
+print ('the testing is velow')
+
 
 bal = ref1.get(field_paths={'StartTime'}).to_dict().get('StartTime')
 print (bal)
+
+## seem like it is still can use if we delet the u 
+print ("below is not using u")
+
+existing_posts = db.collection('users').where('id', '==', 'tele_handle_2').get()
+for post in existing_posts:
+
+    pr = '{} => {}'.format(post.id, post.to_dict())
+    print (pr)
+    print (post.get('username')) ## it has returned the correct one 
+    print(f'existing_posts it {existing_posts}')
+    print (f'post it {post}')
+    print(f'post it {post.id}')
+           
+    ref5 = db.collection("users").document(str(post))
+    ref2.update({"point": 5})
+        ## create a new thing to store the guy's info
+
 ##print (existing_posts.get('username'))
 
 ## time2 = now + timedelta(seconds=60)
