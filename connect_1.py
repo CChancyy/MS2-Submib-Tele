@@ -188,9 +188,6 @@ def main() -> None:
     """Start the bot."""
     application = ApplicationBuilder().token(token).build()
 
-
-
-
     # Create your handlers here
     start_handler = CommandHandler('start', start)
     echo_handler = MessageHandler(filters.TEXT & (~filters.COMMAND), echo)
@@ -224,4 +221,6 @@ from_user=User(
   language_code='en', 
   last_name='Zhang', 
   username='chanciyyy')
+
+  update.message.from_user.id
 '''

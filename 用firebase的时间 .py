@@ -92,7 +92,28 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
             await update.message.reply_text("Your laundry is done. Please collect soon") 
 
     if "finish" in update.message.text:
+        query1 = db.collection('users').where('id', '==', '5578355017').get()
+        query2 = db.collection('washers').where('id', '==', '5578355017').get()
+        for post in query1:
+            pr = '{} => {}'.format(post.id, post.to_dict())
+            await update.message.reply_text(pr) 
+
+            for post2 in query2:
+                await update.message.reply_text(f'post2 is {post2}')
+                pr2 = '{} => {}'.format(post2.id, post2.to_dict())
+                await update.message.reply_text(f'pr is {pr}')
+                await update.message.reply_text(f'pr2 is {pr2}')
+                finish_time = post2.get('StartTime') + timedelta(seconds = 30)
+                await update.message.reply_text(post2.get('StartTime'))
+                await update.message.reply_text(f'finishing_time is {finish_time}')
+                if finish_time > now: 
+                    ori_point = post.get('point')
+                    new_point = ori_point + 5
+                    ref2 = db.collection("users").document(str(post.id))
+                    ref2.update({"point": new_point})
+
         
+        '''
         if now <( time2 + timedelta(seconds = 30)) : ## collect with in 5 min 
             # write the code here
             query1 = db.collection('users').where('id', '==', '5578355017').get()
@@ -112,7 +133,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
                 new_point = ori_point + 5
                 ref2.update({"point": new_point})
 
-
+'''
 
 ################################ this is the cannot change part ################################
 
