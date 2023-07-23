@@ -10,13 +10,16 @@ cred = credentials.Certificate('/Applications/NUS/Orbital Material/Database/_MS2
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
+
+
+now = datetime.now() - timedelta(seconds=20)
+
 query1 = db.collection('users').where('id', '==', '5578355017').get()
 for post in query1:
-    pr = '{} => {}'.format(post.id, post.to_dict())
-    ori_point = post.get('point')
-    new_point = ori_point + 5
-    ref2 = db.collection("users").document(str(post.id))
-    ref2.update({"point": new_point})
+    if datetime.now() > now:
+        ref2 = db.collection("users").document(str(post.id))
+        print(datetime.now())
+        ref2.update({"point": post.get('point') + 5})
 
 
 

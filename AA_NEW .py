@@ -70,47 +70,49 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         await update.message.reply_text("Your machine will be done in 30 minutes.")
         now = datetime.now()
         time1 = now + timedelta(seconds=1)
-        time2 = now + timedelta(seconds=2)
+        global finish_time 
+        finish_time = now + timedelta(seconds=2)
+        
         #await update.message.reply_text("Your laundry will be done in 30 minutes.")
 
     if "Washer 1" in update.message.text:
         ref2 = db.collection("washers").document("washers1")
         ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
-    
+
+    if "finish" in update.message.text: 
+        await update.message.reply_text("This is the sign finish is detected")
+        collect_time = datetime.now()
+        while collect_time > ( finish_time + timedelta(seconds = 30)) :
+            # await update.message.reply_text("while is executing")
+            continue
+        else:
+            await update.message.reply_text("this is the sign that else is detected .")
+            query1 = db.collection('users').where('id', '==', str(update.message.from_user.id)).get()
+            for post in query1:
+                ref2 = db.collection("users").document(str(post.id))
+                ref2.update({"point": post.get('point') + 5})  
+                await update.message.reply_text("finish executing")
+
+    if 'Leaderboard' in update.message.text: 
+        
+        
+
     while datetime.now() < time1 :
         continue
     else:
         await update.message.reply_text("Your laundry will be done in 5 minutes.")
 
-    while datetime.now() < time2 :
+    while datetime.now() < finish_time :
         continue
     else:
-        ## here insert if statement 
+        ## here insert if statement, change the state of washing machine to finish 
         if "Washer 1" in update.message.text:
             ref2 = db.collection("washers").document("washers1")
             ref2.update({"avail": True,"used_by":str(update.message.from_user.id),'collect':False}) 
             await update.message.reply_text("Your laundry is done. Please collect soon") 
-
-    if "finish" in update.message.text:
         
-        if now <( time2 + timedelta(seconds = 30)) : ## collect with in 5 min 
-            # write the code here
-            query1 = db.collection('users').where('id', '==', '5578355017').get()
-            for post in query1:
-                pr = '{} => {}'.format(post.id, post.to_dict())
-                ori_point = post.get('point')
-                new_point = ori_point + 5
-                ref2 = db.collection("users").document(str(post.id))
-                ref2.update({"point": new_point})   
-        if now < time2 + timedelta(seconds = 60): # collect with in 10 minutes 
-            query1 = db.collection('users').where('id', '==', str(update.message.from_user.id)).get()
-            for post in query1:
-                pr = '{} => {}'.format(post.id, post.to_dict())
-                ref2 = db.collection("users").document(str(post.id)) 
-                # get the original point 
-                ori_point = pr.get('point')
-                new_point = ori_point + 5
-                ref2.update({"point": new_point})
+
+
 
 
 
@@ -186,3 +188,20 @@ def main() -> None:
     asyncio.run(application.run_polling())
 
 main()
+
+
+'''
+        
+        if collect_time < ( finish_time + timedelta(seconds = 30)) : ## collect with in 5 min 
+            # write the code here
+            query1 = db.collection('users').where('id', '==', str(update.message.from_user.id)).get()
+            for post in query1:
+                ref2 = db.collection("users").document(str(post.id))
+                ref2.update({"point": post.get('point') + 5})  
+                await update.message.reply_text("finish executing")
+        if collect_time < finish_time + timedelta(seconds = 60): # collect with in 10 minutes 
+            query1 = db.collection('users').where('id', '==', str(update.message.from_user.id)).get()
+            for post in query1:
+                ref2 = db.collection("users").document(str(post.id))
+                ref2.update({"point": post.get('point') + 5})  
+                await update.message.reply_text("finish executing 2") '''

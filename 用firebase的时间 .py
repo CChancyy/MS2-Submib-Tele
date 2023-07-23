@@ -77,26 +77,12 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         ref2 = db.collection("washers").document("washers1")
         ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
     
-    while datetime.now() < time1 :
-        continue
-    else:
-        await update.message.reply_text("Your laundry will be done in 5 minutes.")
-
-    while datetime.now() < time2 :
-        continue
-    else:
-        ## here insert if statement 
-        if "Washer 1" in update.message.text:
-            ref2 = db.collection("washers").document("washers1")
-            ref2.update({"avail": True,"used_by":str(update.message.from_user.id),'collect':False}) 
-            await update.message.reply_text("Your laundry is done. Please collect soon") 
-
     if "finish" in update.message.text:
         query1 = db.collection('users').where('id', '==', '5578355017').get()
         query2 = db.collection('washers').where('id', '==', '5578355017').get()
         for post in query1:
             pr = '{} => {}'.format(post.id, post.to_dict())
-            await update.message.reply_text(pr) 
+            # await update.message.reply_text(pr) 
 
             for post2 in query2:
                 await update.message.reply_text(f'post2 is {post2}')
@@ -111,6 +97,24 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
                     new_point = ori_point + 5
                     ref2 = db.collection("users").document(str(post.id))
                     ref2.update({"point": new_point})
+
+
+
+    while datetime.now() < time1 :
+        continue
+    else:
+        await update.message.reply_text("Your laundry will be done in 5 minutes.")
+
+    while datetime.now() < time2 :
+        continue
+    else:
+        ## here insert if statement 
+        if "Washer 1" in update.message.text:
+            ref2 = db.collection("washers").document("washers1")
+            ref2.update({"avail": True,"used_by":str(update.message.from_user.id),'collect':False}) 
+            await update.message.reply_text("Your laundry is done. Please collect soon") 
+
+
 
         
         '''
