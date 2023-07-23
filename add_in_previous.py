@@ -55,9 +55,56 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
             reply_keyboard, one_time_keyboard=True, resize_keyboard = True, input_field_placeholder="Command"
         ),
     )
-
+    
 # now is another function
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    if 'Contact Previous User' in update.message.text: 
+        await update.message.reply_text(
+            "Please send the message in the following format: \n \nTo the previous user: [the content you want to send] \n \nNotice that you can also provide your telegram handle so that the previous user can get back to you :) ")
+    
+    if 'previous' in update.message.text: 
+        ## if he is the pre and he need to find the prepre
+        if db.collection('washers').where('previous', '==', str(update.message.from_user.id)).get() != []:
+            query = db.collection('washers').where('previous', '==', str(update.message.from_user.id)).get()
+            for post in query:
+                target_chat_id = post.get('prepre')
+                message = update.message
+                await context.bot.send_message(chat_id=target_chat_id, text="Hi! You have an incoming message from the next user of the machine.")
+                await context.bot.forward_message(chat_id=target_chat_id, from_chat_id=message.chat.id, message_id=message.message_id)
+                await context.bot.send_message(chat_id=update.effective_chat.id, text="Message forwarded successfully!")
+
+        if db.collection('dryers').where('previous', '==', str(update.message.from_user.id)).get() != []:
+            query = db.collection('dryers').where('previous', '==', str(update.message.from_user.id)).get()
+            for post in query:
+                target_chat_id = post.get('prepre')
+                message = update.message
+                await context.bot.send_message(chat_id=target_chat_id, text="Hi! You have an incoming message from the next user of the machine.")
+                await context.bot.forward_message(chat_id=target_chat_id, from_chat_id=message.chat.id, message_id=message.message_id)
+                await context.bot.send_message(chat_id=update.effective_chat.id, text="Message forwarded successfully!")
+
+        ## if he is the current and he need to find the previous
+        if db.collection('washers').where('used_by', '==', str(update.message.from_user.id)).get() != []:
+            query = db.collection('dryers').where('used_by', '==', str(update.message.from_user.id)).get()
+            for post in query:
+                target_chat_id = post.get('previous')
+                message = update.message
+                await context.bot.send_message(chat_id=target_chat_id, text="Hi! You have an incoming message from the next user of the machine.")
+                await context.bot.forward_message(chat_id=target_chat_id, from_chat_id=message.chat.id, message_id=message.message_id)
+                await context.bot.send_message(chat_id=update.effective_chat.id, text="Message forwarded successfully!")
+
+
+        if db.collection('dryers').where('used_by', '==', str(update.message.from_user.id)).get() != []:
+            query = db.collection('dryers').where('used_by', '==', str(update.message.from_user.id)).get()
+            for post in query:
+                target_chat_id = post.get('previous')
+                message = update.message
+                await context.bot.send_message(chat_id=target_chat_id, text="Hi! You have an incoming message from the next user of the machine.")
+                await context.bot.forward_message(chat_id=target_chat_id, from_chat_id=message.chat.id, message_id=message.message_id)
+                await context.bot.send_message(chat_id=update.effective_chat.id, text="Message forwarded successfully!")
+
+        
+
+        
     if "using" in update.message.text: ## select location
         reply_keyboard = [["RVRC BLK E"],["RVRC BLK F"]]
         await update.message.reply_text(
@@ -201,7 +248,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
                 ref3 = db.collection("dryers").document(str(post2.id))
                 ref3.update({"avail": True}) 
             await update.message.reply_text("Your laundry is done. Please collect soon") 
-
+    
 '''
        if "E Washer 1" in update.message.text:
             ref2 = db.collection("washers").document("washers1")
@@ -300,18 +347,3 @@ def main() -> None:
 main()
 
 
-'''
-        
-        if collect_time < ( finish_time + timedelta(seconds = 30)) : ## collect with in 5 min 
-            # write the code here
-            query1 = db.collection('users').where('id', '==', str(update.message.from_user.id)).get()
-            for post in query1:
-                ref2 = db.collection("users").document(str(post.id))
-                ref2.update({"point": post.get('point') + 5})  
-                await update.message.reply_text("finish executing")
-        if collect_time < finish_time + timedelta(seconds = 60): # collect with in 10 minutes 
-            query1 = db.collection('users').where('id', '==', str(update.message.from_user.id)).get()
-            for post in query1:
-                ref2 = db.collection("users").document(str(post.id))
-                ref2.update({"point": post.get('point') + 5})  
-                await update.message.reply_text("finish executing 2") '''
