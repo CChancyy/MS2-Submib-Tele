@@ -91,6 +91,53 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     if "E Washer 1" in update.message.text:
         ref2 = db.collection("washers").document("washers1")
         ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+    if "E Washer 2" in update.message.text:
+        ref2 = db.collection("washers").document("washers2")
+        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+    if "E Washer 3" in update.message.text:
+        ref2 = db.collection("washers").document("washers3")
+        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+    if "E Washer 4" in update.message.text:
+        ref2 = db.collection("washers").document("washers4")
+        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+    if "F Washer 1" in update.message.text:
+        ref2 = db.collection("washers").document("washers5")
+        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+    if "F Washer 2" in update.message.text:
+        ref2 = db.collection("washers").document("washers6")
+        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+    if "F Washer 3" in update.message.text:
+        ref2 = db.collection("washers").document("washers7")
+        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+    if "F Washer 4" in update.message.text:
+        ref2 = db.collection("washers").document("washers8")
+        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+
+    if "E Dryer 1" in update.message.text:
+        ref2 = db.collection("dryers").document("dryer1")
+        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+    if "E Dryer 2" in update.message.text:
+        ref2 = db.collection("dryers").document("dryer2")
+        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+    if "E Dryer 3" in update.message.text:
+        ref2 = db.collection("dryers").document("dryer3")
+        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+    if "E Dryer 4" in update.message.text:
+        ref2 = db.collection("dryers").document("dryer4")
+        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+    if "F Dryer 1" in update.message.text:
+        ref2 = db.collection("dryers").document("dryer5")
+        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+    if "F Dryer 2" in update.message.text:
+        ref2 = db.collection("dryers").document("dryer6")
+        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+    if "F Dryer 3" in update.message.text:
+        ref2 = db.collection("dryers").document("dryer7")
+        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+    if "F Dryer 4" in update.message.text:
+        ref2 = db.collection("dryers").document("dryer8")
+        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+
 
     if "finish" in update.message.text: 
         collect_time = datetime.now()
@@ -103,23 +150,22 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
             for post in query1:
                 ref2 = db.collection("users").document(str(post.id))
                 ref2.update({"point": post.get('point') + 5})  
-                #await update.message.reply_text("finish executing" 
+                await update.message.reply_text(f"Thank you for collecting your clothes in time! \n 5 points has been awarded to you. \n Your current point is {post.get('point') + 5}." )
+            
             ## write a function to determine either washer or dryer is used
             if db.collection('washers').where('used_by', '==', str(update.message.from_user.id)).get() != []:
-                query2 = db.collection('washers').where('used_by', '==', '5578355017').get()
+                query2 = db.collection('washers').where('used_by', '==', str(update.message.from_user.id)).get()
                 for post2 in query2:
                     ref3 = db.collection("washers").document(str(post2.id))
                     ref3.update({"collect": True})
                     #await update.message.reply_text("finish changing the status of collection to true")
             
-            if db.collection('dryers').where('used_by', '==', str(update.message.from_user.id)).get() != []:
-                query2 = db.collection('dryers').where('used_by', '==', '5578355017').get()
+            elif db.collection('dryers').where('used_by', '==', str(update.message.from_user.id)).get() != []:
+                query2 = db.collection('dryers').where('used_by', '==', str(update.message.from_user.id)).get()
                 for post2 in query2:
                     ref3 = db.collection("dryers").document(str(post2.id))
                     ref3.update({"collect": True})
                     #await update.message.reply_text("finish changing the status of collection to true")      
-            
-
 
     if 'Leaderboard' in update.message.text: 
         # write code here
@@ -141,15 +187,43 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
     while datetime.now() < finish_time :
         continue
     else:
-        ## here insert if statement, change the state of washing machine to finish 
-        if "Washer 1" in update.message.text:
+        ## here insert if statement, change the state of washing machine to finish
+        if db.collection('washers').where('used_by', '==', str(update.message.from_user.id)).get() != []:
+            query2 = db.collection('washers').where('used_by', '==', str(update.message.from_user.id)).get()
+            for post2 in query2:
+                ref3 = db.collection("washers").document(str(post2.id))
+                ref3.update({"avail": True})
+            await update.message.reply_text("Your laundry is done. Please collect soon") 
+        
+        if db.collection('dryers').where('used_by', '==', str(update.message.from_user.id)).get() != []:
+            query2 = db.collection('dryers').where('used_by', '==', str(update.message.from_user.id)).get()
+            for post2 in query2:
+                ref3 = db.collection("dryers").document(str(post2.id))
+                ref3.update({"avail": True}) 
+            await update.message.reply_text("Your laundry is done. Please collect soon") 
+
+'''
+       if "E Washer 1" in update.message.text:
             ref2 = db.collection("washers").document("washers1")
             ref2.update({"avail": True,"used_by":str(update.message.from_user.id),'collect':False}) 
             await update.message.reply_text("Your laundry is done. Please collect soon") 
-        
-
-
-
+        if "E Washer 2" in update.message.text:
+            ref2 = db.collection("washers").document("washers2")
+            ref2.update({"avail": True,"used_by":str(update.message.from_user.id),'collect':False}) 
+            await update.message.reply_text("Your laundry is done. Please collect soon") 
+        if "E Washer 3" in update.message.text:
+            ref2 = db.collection("washers").document("washers3")
+            ref2.update({"avail": True,"used_by":str(update.message.from_user.id),'collect':False}) 
+            await update.message.reply_text("Your laundry is done. Please collect soon") 
+        if "E Washer 4" in update.message.text:
+            ref2 = db.collection("washers").document("washers4")
+            ref2.update({"avail": True,"used_by":str(update.message.from_user.id),'collect':False}) 
+            await update.message.reply_text("Your laundry is done. Please collect soon") 
+        if "E Washer 4" in update.message.text:
+            ref2 = db.collection("washers").document("washers3")
+            ref2.update({"avail": True,"used_by":str(update.message.from_user.id),'collect':False}) 
+            await update.message.reply_text("Your laundry is done. Please collect soon") 
+'''
 
 
 ################################ this is the cannot change part ################################
