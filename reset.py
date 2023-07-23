@@ -10,7 +10,7 @@ cred = credentials.Certificate('/Applications/NUS/Orbital Material/Database/_MS2
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
-data = {'StartTime':datetime.now(), 'avail':True, 'collect': True, 'used_by':'123', 'previous':'123','prepre':'123'}
+data = {'StartTime':datetime.now(), 'avail':True, 'collect': True, 'used_by':'', 'previous':'','prepre':''}
 db.collection('dryers').document('dryer1').set(data)
 db.collection('dryers').document('dryer2').set(data)
 db.collection('dryers').document('dryer3').set(data)
