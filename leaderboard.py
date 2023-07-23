@@ -20,8 +20,14 @@ cred = credentials.Certificate('/Applications/NUS/Orbital Material/Database/_MS2
 firebase_admin.initialize_app(cred)
 db = firestore.client()
 
-pre_id = '5578355017'
-msg = 'hi!'
+ref2 = db.collection("washers").document("washers1")
+num = ref2.get(field_paths={'used_by'}).to_dict()
+num.get("used_by")
+
+
+
+#ref2.update({'prepre':'previous','previous':'used_by',"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+
 
 
 '''

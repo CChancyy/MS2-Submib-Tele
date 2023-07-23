@@ -103,8 +103,6 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
                 await context.bot.send_message(chat_id=update.effective_chat.id, text="Message forwarded successfully!")
 
         
-
-        
     if "using" in update.message.text: ## select location
         reply_keyboard = [["RVRC BLK E"],["RVRC BLK F"]]
         await update.message.reply_text(
@@ -137,53 +135,85 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
     if "E Washer 1" in update.message.text:
         ref2 = db.collection("washers").document("washers1")
-        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+        ref2.update({ 'prepre': str(ref2.get(field_paths={'previous'}).to_dict().get("previous")) , 
+                     'previous': str(ref2.get(field_paths={'used_by'}).to_dict().get("used_by")), 
+                        "avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
     if "E Washer 2" in update.message.text:
         ref2 = db.collection("washers").document("washers2")
-        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+        ref2.update({ 'prepre': str(ref2.get(field_paths={'previous'}).to_dict().get("previous")) , 
+                     'previous': str(ref2.get(field_paths={'used_by'}).to_dict().get("used_by")), 
+                        "avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
     if "E Washer 3" in update.message.text:
         ref2 = db.collection("washers").document("washers3")
-        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+        ref2.update({ 'prepre': str(ref2.get(field_paths={'previous'}).to_dict().get("previous")) , 
+                     'previous': str(ref2.get(field_paths={'used_by'}).to_dict().get("used_by")), 
+                        "avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
     if "E Washer 4" in update.message.text:
         ref2 = db.collection("washers").document("washers4")
-        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+        ref2.update({ 'prepre': str(ref2.get(field_paths={'previous'}).to_dict().get("previous")) , 
+                     'previous': str(ref2.get(field_paths={'used_by'}).to_dict().get("used_by")), 
+                        "avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
     if "F Washer 1" in update.message.text:
         ref2 = db.collection("washers").document("washers5")
-        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+        ref2.update({ 'prepre': str(ref2.get(field_paths={'previous'}).to_dict().get("previous")) , 
+                     'previous': str(ref2.get(field_paths={'used_by'}).to_dict().get("used_by")), 
+                        "avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
     if "F Washer 2" in update.message.text:
         ref2 = db.collection("washers").document("washers6")
-        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+        ref2.update({ 'prepre': str(ref2.get(field_paths={'previous'}).to_dict().get("previous")) , 
+                     'previous': str(ref2.get(field_paths={'used_by'}).to_dict().get("used_by")), 
+                        "avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
     if "F Washer 3" in update.message.text:
         ref2 = db.collection("washers").document("washers7")
-        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+        ref2.update({ 'prepre': str(ref2.get(field_paths={'previous'}).to_dict().get("previous")) , 
+                     'previous': str(ref2.get(field_paths={'used_by'}).to_dict().get("used_by")), 
+                        "avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
     if "F Washer 4" in update.message.text:
         ref2 = db.collection("washers").document("washers8")
-        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+        ref2.update({ 'prepre': str(ref2.get(field_paths={'previous'}).to_dict().get("previous")) , 
+                     'previous': str(ref2.get(field_paths={'used_by'}).to_dict().get("used_by")), 
+                        "avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
 
     if "E Dryer 1" in update.message.text:
         ref2 = db.collection("dryers").document("dryer1")
-        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+        ref2.update({ 'prepre': str(ref2.get(field_paths={'previous'}).to_dict().get("previous")) , 
+                     'previous': str(ref2.get(field_paths={'used_by'}).to_dict().get("used_by")), 
+                        "avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
     if "E Dryer 2" in update.message.text:
         ref2 = db.collection("dryers").document("dryer2")
-        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+        ref2.update({ 'prepre': str(ref2.get(field_paths={'previous'}).to_dict().get("previous")) , 
+                     'previous': str(ref2.get(field_paths={'used_by'}).to_dict().get("used_by")), 
+                        "avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
     if "E Dryer 3" in update.message.text:
         ref2 = db.collection("dryers").document("dryer3")
-        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+        ref2.update({ 'prepre': str(ref2.get(field_paths={'previous'}).to_dict().get("previous")) , 
+                     'previous': str(ref2.get(field_paths={'used_by'}).to_dict().get("used_by")), 
+                        "avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
     if "E Dryer 4" in update.message.text:
         ref2 = db.collection("dryers").document("dryer4")
-        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+        ref2.update({ 'prepre': str(ref2.get(field_paths={'previous'}).to_dict().get("previous")) , 
+                     'previous': str(ref2.get(field_paths={'used_by'}).to_dict().get("used_by")), 
+                        "avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
     if "F Dryer 1" in update.message.text:
         ref2 = db.collection("dryers").document("dryer5")
-        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+        ref2.update({ 'prepre': str(ref2.get(field_paths={'previous'}).to_dict().get("previous")) , 
+                     'previous': str(ref2.get(field_paths={'used_by'}).to_dict().get("used_by")), 
+                        "avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
     if "F Dryer 2" in update.message.text:
         ref2 = db.collection("dryers").document("dryer6")
-        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+        ref2.update({ 'prepre': str(ref2.get(field_paths={'previous'}).to_dict().get("previous")) , 
+                     'previous': str(ref2.get(field_paths={'used_by'}).to_dict().get("used_by")), 
+                        "avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
     if "F Dryer 3" in update.message.text:
         ref2 = db.collection("dryers").document("dryer7")
-        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+        ref2.update({ 'prepre': str(ref2.get(field_paths={'previous'}).to_dict().get("previous")) , 
+                     'previous': str(ref2.get(field_paths={'used_by'}).to_dict().get("used_by")), 
+                        "avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
     if "F Dryer 4" in update.message.text:
         ref2 = db.collection("dryers").document("dryer8")
-        ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
+        ref2.update({ 'prepre': str(ref2.get(field_paths={'previous'}).to_dict().get("previous")) , 
+                     'previous': str(ref2.get(field_paths={'used_by'}).to_dict().get("used_by")), 
+                        "avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
 
 
     if "finish" in update.message.text: 
