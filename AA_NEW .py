@@ -58,14 +58,27 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
 
 # now is another function
 async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
-
-    if "using" in update.message.text:
-        reply_keyboard = [["Washer 1", "Washer 2","Washer 3"],["Dryer 1", "Dryer 2","Dryer 3","Dryer 4"]]
+    if "using" in update.message.text: ## select location
+        reply_keyboard = [["RVRC BLK E"],["RVRC BLK F"]]
         await update.message.reply_text(
             "Please select a location",
             reply_markup=ReplyKeyboardMarkup(
                 reply_keyboard, one_time_keyboard=True, resize_keyboard = True, input_field_placeholder="Command"),)
-    
+        
+    if "BLK E" in update.message.text and "Washer" not in update.message.text and "Dryer" not in update.message.text: ## select machine
+        reply_keyboard = [["E Washer 1", "E Washer 2","E Washer 3","E Washer 4"],["E Dryer 1", "E Dryer 2","E Dryer 3","E Dryer 4"]]
+        await update.message.reply_text(
+            "Please select a location",
+            reply_markup=ReplyKeyboardMarkup(
+                reply_keyboard, one_time_keyboard=True, resize_keyboard = True, input_field_placeholder="Command"),)
+        
+    if "BLK F" in update.message.text and "Washer" not in update.message.text and "Dryer" not in update.message.text: ## select machine
+        reply_keyboard = [["F Washer 1", "F Washer 2","F Washer 3","F Washer 4"],["F Dryer 1", "F Dryer 2","F Dryer 3","E Dryer 4"]]
+        await update.message.reply_text(
+            "Please select a location",
+            reply_markup=ReplyKeyboardMarkup(
+                reply_keyboard, one_time_keyboard=True, resize_keyboard = True, input_field_placeholder="Command"),)
+
     if "Washer" in update.message.text or "Dryer" in update.message.text:
         await update.message.reply_text("Your machine will be done in 30 minutes.")
         now = datetime.now()
@@ -75,23 +88,38 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         
         #await update.message.reply_text("Your laundry will be done in 30 minutes.")
 
-    if "Washer 1" in update.message.text:
+    if "E Washer 1" in update.message.text:
         ref2 = db.collection("washers").document("washers1")
         ref2.update({"avail": False,"used_by":str(update.message.from_user.id), 'StartTime':now, 'collect':False})
 
     if "finish" in update.message.text: 
-        await update.message.reply_text("This is the sign finish is detected")
         collect_time = datetime.now()
         while collect_time > ( finish_time + timedelta(seconds = 30)) :
             # await update.message.reply_text("while is executing")
             continue
         else:
-            await update.message.reply_text("this is the sign that else is detected .")
+            # the following is the code for award the point
             query1 = db.collection('users').where('id', '==', str(update.message.from_user.id)).get()
             for post in query1:
                 ref2 = db.collection("users").document(str(post.id))
                 ref2.update({"point": post.get('point') + 5})  
-                await update.message.reply_text("finish executing")
+                #await update.message.reply_text("finish executing" 
+            ## write a function to determine either washer or dryer is used
+            if db.collection('washers').where('used_by', '==', str(update.message.from_user.id)).get() != []:
+                query2 = db.collection('washers').where('used_by', '==', '5578355017').get()
+                for post2 in query2:
+                    ref3 = db.collection("washers").document(str(post2.id))
+                    ref3.update({"collect": True})
+                    #await update.message.reply_text("finish changing the status of collection to true")
+            
+            if db.collection('dryers').where('used_by', '==', str(update.message.from_user.id)).get() != []:
+                query2 = db.collection('dryers').where('used_by', '==', '5578355017').get()
+                for post2 in query2:
+                    ref3 = db.collection("dryers").document(str(post2.id))
+                    ref3.update({"collect": True})
+                    #await update.message.reply_text("finish changing the status of collection to true")      
+            
+
 
     if 'Leaderboard' in update.message.text: 
         # write code here
