@@ -94,7 +94,15 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
                 await update.message.reply_text("finish executing")
 
     if 'Leaderboard' in update.message.text: 
-        
+        # write code here
+        query = db.collection('users').order_by('point',direction=firestore.Query.DESCENDING).limit(5)
+        results = query.get()
+        a = 1
+        message = ''
+        for post in results:
+            message = message + "No." + str(a) + '       ' + str(post.get('username'))  + '       '  + str(post.get('point')) + '\n'
+            a = a + 1 
+        await update.message.reply_text (message)
         
 
     while datetime.now() < time1 :

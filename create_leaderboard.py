@@ -11,7 +11,7 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 
-
+'''
 now = datetime.now() - timedelta(seconds=20)
 
 query1 = db.collection('users').where('id', '==', '5578355017').get()
@@ -21,10 +21,23 @@ for post in query1:
         print(datetime.now())
         ref2.update({"point": post.get('point') + 5})
 
+users_leadboard = db.collection("users")
+query = users_leadboard.order_by("point", direction=firestore.Query.DESCENDING).limit(3)
+results = query.stream()
+print (results)
+'''
 
 
+query = db.collection('users').order_by('point',direction=firestore.Query.DESCENDING).limit(3)
+results = query.get()
+a = 1
+message = ''
+for post in results:
+    message = message + "No." + str(a) + '       ' + str(post.get('username'))  + '       '  + str(post.get('point')) + '\n'
 
-
+    a = a + 1 
+print (message)
+           
 '''
 data = {'id':'123', 'point':0, 'username': '123'}
 db.collection('users').add(data)
