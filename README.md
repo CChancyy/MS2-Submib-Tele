@@ -13,7 +13,9 @@ Students residing in school hostels often face many problems due to inefficienci
 
 2) Students have to manually keep track of the finishing time by setting alarms to remind themselves. However, many students find this process troublesome and does not want their alarm to disrupt them during classes or meetings.
 
-3) Many students also face the problem that they lost/found a piece of clothes but do not know where to report it. 
+3) Students lack motivation to collect their laundry timely, leading to a situation where they often leave their laundry in the machines for extended periods. This behavior can inconvenience others who need to use the machines and disrupt the overall efficiency of the laundry system.
+
+4) Many students also face the problem that they lost/found a piece of clothes but do not know where to report it. 
 
 Since no existing solutions address all of these problems, we are motivated to create a Telegram Bot accompanied by a website to tackle these issues. 
 
