@@ -89,8 +89,14 @@ the website is deployed at https://ms-3-website-master.vercel.app
 
 
 ### 1.6 Tech Stack
-Front end: react <br>
-Backend: Firebase
+**Front end**: <br>
+react <br> <br>
+**Backend**: <br>
+Firebase 9 <br>
+Vercel <br> <br>
+**General**: <br>
+Github <br>
+VSCode <br>
 
 ## Getting Started
 ### 2.1 Prerequisites
