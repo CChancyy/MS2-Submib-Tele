@@ -9,13 +9,13 @@
 ### 1.1 Problem Defined
 Students residing in school hostels often face many problems due to inefficiencies in the laundry service. 
 
-1) Students have to physically visit the laundry room to check for available washing machines. Therefore, they may often find themselves carrying bulky laundry bags downstairs only to discover that all the washing machines are already occupied. This leaves them with no choice but to wait for the machines to become available, which can take a long time, especially if the previous user is out for class.
+1) Students have to **physically visit the laundry room to check for available washing machines**. Therefore, they may often find themselves carrying bulky laundry bags downstairs only to discover that all the washing machines are already occupied. This leaves them with no choice but to wait for the machines to become available, which can take a long time, especially if the previous user is out for class.
 
-2) Students have to manually keep track of the finishing time by setting alarms to remind themselves. However, many students find this process troublesome and does not want their alarm to disrupt them during classes or meetings.
+2) Students have to **manually keep track of the finishing time** by setting alarms to remind themselves. However, many students find this process troublesome and does not want their alarm to disrupt them during classes or meetings.
 
-3) Students lack motivation to collect their laundry timely, leading to a situation where they often leave their laundry in the machines for extended periods. This behavior can inconvenience others who need to use the machines and disrupt the overall efficiency of the laundry system.
+3) Students **lack motivation to collect their laundry timely**, leading to a situation where they often leave their laundry in the machines for extended periods. This behavior can inconvenience others who need to use the machines and disrupt the overall efficiency of the laundry system.
 
-4) Many students also face the problem that they lost/found a piece of clothes but do not know where to report it. 
+4) Many students also face the problem that they **lost/found a piece of clothes** but do not know where to report it. 
 
 Since no existing solutions address all of these problems, we are motivated to create a Telegram Bot accompanied by a website to tackle these issues. 
 
