@@ -98,15 +98,7 @@ Backend: Firebase
 - Github
 
 ### 2.2 Installation
-#### 2.2.1 Website
-1. Download the zip file from https://github.com/CChancyy/MileStone-Submission.git  
-2. Install by running the following in the directory `npm install`
-3. Install Firebase by running `npm install firebase`
-4. Start the app by running `npm start`
-5. Open https://localhost:3000 with your browser to see the website
-Note: every time the user declares the usage in the Telegram Bot, the website has to be refreshed to view the updated availability (may need to wait for about 1 second). 
-
-#### 2.2.2 Telegram Bot 
+#### 2.2.1 Telegram Bot 
 1. Download the zip file from https://github.com/CChancyy/MS2-Submib-Tele.git 
 2. Install by running the following in the directory <br>
    `pip install python-telegram-bot` <br>
@@ -114,6 +106,18 @@ Note: every time the user declares the usage in the Telegram Bot, the website ha
    `pip install firebase_admin`<br>
 3. Change the path to the path to service account in your own laptop
 ![image](https://github.com/CChancyy/MS3-Tele/assets/110718225/27c8237c-fd02-417b-8087-f3263264bd1f)
+
+#### 2.2.2 Website
+1. Download the zip file from https://github.com/z-wenqing/MS3-website/tree/master
+2. Install by running the following in the directory `npm install`
+3. Install Firebase by running `npm install firebase`
+4. Start the app by running `npm start`
+5. Open https://localhost:3000 with your browser to see the website <br>
+**Note**:
+1. every time the user declares the usage in the Telegram Bot, the website has to be refreshed to view the updated availability (may need to wait for about 1 second).
+2. if the user updates on the Telegram Bot after he logged into the website, he has to manually select location when he refreshed the page. (need to solve)
+
+
 
 ### 2.3 File Structure
 #### Folders
@@ -173,7 +177,19 @@ I am a student who wants to be awarded points when I have collected my laundry i
 ![image](https://github.com/CChancyy/MS3-Tele/assets/110718225/aaabb4fd-1c52-4099-a7d3-5505bffe90d1)
 Message is sent after the user indicate that he has collected laundry and his point is also displayed.
 
+### 4.1 Unit testing
+We split the whole process into small sections and test the connection between each section.
 
+#### 4.1.1 Testing the Connection between Web and Cloud Firestore
+Change the availability of machine manually on Cloud Firestore, and refresh the page to see whether the web is updated corrected. If it is updated accordingly, we know that web and firebase is connected.
+![image](https://github.com/CChancyy/MS3-Tele/assets/110718225/5825a0da-d24c-4589-a9bc-331f374f9d70)
+
+#### 4.1.2 Testing the connection between Python and Cloud Firestore
+Run a simplified file to test the connection between Python and Cloud Firestore.
+![image](https://github.com/CChancyy/MS3-Tele/assets/110718225/92187fbf-7536-4fa5-a335-780403489d2c)
+
+### 4.3 User testing
+We conducted testing with 10 NUS students to evaluate the Telegram Bot and website. After engaging with the telegram bot and making commands, we sought their feedback on their experience using both the Telegram Bot and the web platform. The outcome is evident that 80% of them agreed that the laundry system significantly improves the efficiency of the laudnry process. This positive feedback reflects the effectiveness of the platform in streamlining laundry management and enhancing the overall user experience. We also take their suggestions into consideration and incorporate their valuable suggestions to enhance the platform. 
 
 
 
