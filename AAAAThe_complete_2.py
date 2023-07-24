@@ -194,7 +194,7 @@ async def echo(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
         now = datetime.now()
         time1 = now + timedelta(seconds=5)
         global finish_time 
-        finish_time = now + timedelta(seconds=10)
+        finish_time = now + timedelta(seconds=20)
         
         #await update.message.reply_text("Your laundry will be done in 30 minutes.")
 
