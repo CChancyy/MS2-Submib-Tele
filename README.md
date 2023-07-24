@@ -71,6 +71,7 @@ Our project's primary focus is on enhancing the laundry experience for students 
 - For seamless communication between users, the bot offers a convenient feature to contact the previous user of a laundry machine. If the user wants to contact the previous user of the machine, the bot can help to forward the message from the current user to the previous user. This facilitates effective communication or timely information exchange, such as prompting the previous user to collected their laundry or helping to resolve lost-and-found items.
 
 #### 1.5.2 Website
+the website is deployed at https://ms-3-website-master.vercel.app
 1. **Login page**
 - The website  incorporates a login page, allowing users to access their accounts  using their email credentials if they already have an existing account.
 
